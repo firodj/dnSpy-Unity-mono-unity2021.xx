@@ -1,4 +1,4 @@
-# umpatcher update for Unity versions 2021.xx 
+# umpatcher update for Unity versions 2021.xx
 *by Neoshrimp*
 
 Mono project structure seems to have changed quite a bit going from 2020.xx to 2021.xx. So much so that the current umpacher is unable to handle it. This fork attempts to fix that.
@@ -16,7 +16,7 @@ Many thanks to this [blog post](https://blog.csdn.net/Ricardo0012/article/detail
 
 ### Tips for building and attaching
 
-`toolset` version actually matters. Unity version 2020.x or bellow should use `v141`. Else dnSpy will mysterious fail to attach a game with patched mono.  VisualStudio 2017 Buildtools must be installed for `v141` to be available. 
+`toolset` version actually matters. Unity version 2020.x or bellow should use `v141`. Else dnSpy will mysterious fail to attach a game with patched mono.  VisualStudio 2017 Buildtools must be installed for `v141` to be available.
 
 Versions 2021.x seem to work fine with both `v141` and `v143` toolsets. In case of using `v143` a slight source code patch is needed, therefore, it's best to specify `--toolset v143` flag when running the umpatcher.
 
@@ -397,9 +397,11 @@ version | git hash
 2019.4.25f1-mbe | 90cf2678d79ad248593837523bde01561ee6548e
 2019.4.26f1-mbe | 90cf2678d79ad248593837523bde01561ee6548e
 2019.4.28f1-mbe | 80e6f67978ff74743da62b80ccdce59aff033537
---- | versions added in this repo
 2020.3.33f1-mbe | 734c22d2358f2a335d949022296f57d305ac24c1
 2020.3.43f1-mbe | 98b3752f0139c20a72d9e70e68f8b0a679d6fd7b
 2021.3.14f1-mbe | acb7cd69d120a28d0e0e2e3f4509de412fff2fb1
 2021.3.18f1-mbe | 81a7696b7c1960113bebfe610ac3e693c7d41fce
 2021.3.27f1-mbe | d975133f02b48373758706ef6b5634738a293c2e
+--- | versions added in this repo
+2020.3.25f1-mbe | 0295b15e2ea7be623205c3aea198e2f15f87b450
+2021.3.35f1-mbe | a4e47a64808f26a2a077aadc2e050fc8a8fce38a
