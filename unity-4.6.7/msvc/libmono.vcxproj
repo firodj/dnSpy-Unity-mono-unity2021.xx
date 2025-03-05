@@ -152,7 +152,7 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)_$(Configuration)/obj/$(ProjectName)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)_$(Configuration)/bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)_$(Configuration)/obj/$(ProjectName)\</IntDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_eglib|Win32'">..\builds\embedruntimes\win32\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_eglib|Win32'">..\..\builds\$(Configuration)\unity-4.6.7\win$(PlatformArchitecture)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_eglib|Win32'">$(Platform)_$(Configuration)/obj/$(ProjectName)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_eglib|x64'">..\..\builds\$(Configuration)\unity-4.6.7\win$(PlatformArchitecture)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_eglib|x64'">$(Platform)_$(Configuration)/obj/$(ProjectName)\</IntDir>
@@ -354,7 +354,7 @@
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>..\libgc\include;..\;..\eglib\src;..\mono;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TARGET_X86;_DEBUG;__i386__;TARGET_X86;i386;WIN32;_WIN32;__WIN32__;_WINDOWS;WINDOWS;PLATFORM_WIN32;TARGET_WIN32;_CRT_SECURE_NO_DEPRECATE;GC_NOT_DLL;HAVE_CONFIG_H;WINVER=0x0500;_WIN32_WINNT=0x0500;_WIN32_IE=0x0501;WIN32_THREADS;FD_SETSIZE=1024;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TARGET_X86;_DEBUG;__i386__;i386;WIN32;_WIN32;__WIN32__;_WINDOWS;WINDOWS;PLATFORM_WIN32;TARGET_WIN32;_CRT_SECURE_NO_DEPRECATE;GC_NOT_DLL;HAVE_CONFIG_H;WINVER=0x0501;_WIN32_WINNT=0x0501;_WIN32_IE=0x0501;WIN32_THREADS;FD_SETSIZE=1024;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -441,7 +441,7 @@
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>..\libgc\include;..\;..\eglib\src;..\mono;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;__i386__;TARGET_X86;i386;WIN32;_WIN32;__WIN32__;_WINDOWS;WINDOWS;PLATFORM_WIN32;TARGET_WIN32;_CRT_SECURE_NO_DEPRECATE;GC_NOT_DLL;HAVE_CONFIG_H;WINVER=0x0500;_WIN32_WINNT=0x0500;_WIN32_IE=0x0501;WIN32_THREADS;FD_SETSIZE=1024;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;__i386__;TARGET_X86;i386;WIN32;_WIN32;__WIN32__;_WINDOWS;WINDOWS;PLATFORM_WIN32;TARGET_WIN32;_CRT_SECURE_NO_DEPRECATE;GC_NOT_DLL;HAVE_CONFIG_H;WINVER=0x0501;_WIN32_WINNT=0x0501;_WIN32_IE=0x0501;WIN32_THREADS;FD_SETSIZE=1024;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
