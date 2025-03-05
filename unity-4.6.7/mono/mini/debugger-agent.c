@@ -772,7 +772,6 @@ mono_debugger_agent_parse_options (char *options)
 					agent_config.address = g_strdup_printf ("0.0.0.0:%u", 56000 + (GetCurrentProcessId () % 1000));
 				}
 			}
-		} else if (dnSpy_debugger_agent_parse_options (arg)) {
 		} else {
 			print_usage ();
 			exit (1);
@@ -824,8 +823,6 @@ mono_debugger_agent_init (void)
 	mono_profiler_install_assembly (NULL, assembly_load, assembly_unload, NULL);
 	mono_profiler_install_jit_end (jit_end);
 	mono_profiler_install_method_invoke (start_runtime_invoke, end_runtime_invoke);
-
-	dnSpy_debugger_init_after_agent ();
 
 	debugger_tls_id = TlsAlloc ();
 
@@ -5907,8 +5904,33 @@ domain_commands (int command, guint8 *p, guint8 *end, Buffer *buf)
 		if (err)
 			return err;
 
-		// FIXME:
-		g_assert (domain == domain2);
+		/* 
+		   The assert below is commented to fix a crash when inspecting enums/structs in a multi-domain setup.
+		 
+		   When the debugger wants to inspect an enum/struct, it first creates a boxed value of it.
+
+		   In this version of the debugger agent there is a bug where the boxed value is created in
+		   the same domain as the current System.Threading.Thread object was originally created. 
+		   Instead of creating the boxed value in the domain that is currently active for the thread.
+		 
+		   This means that if the managed thread object was created in a root domain, then the
+		   debugger client will ALWAYS create the boxed value in the root domain. If you change
+		   the active domain later, this does not change the domain in which the thread object was created.
+		 
+		   If you have an enum/struct in a child domain that you want to inspect, then the 'domain' variable
+		   above will be set to the root domain (for the thread) and 'domain2' will be set to the child domain
+		   (for the enum/struct). Which causes the assert below to fail and crash/abort the application.
+		 
+		   The correct fix for this is to fix the debugger client, so the correct active domain is returned for the
+		   current thread. This has been fixed in newer versions of the debugger client/agent (protocol).
+
+		   Fixing this issue in this version of the debugger agent and the latest debugger client has proven
+		   to be very difficult, so instead we just comment the assert and let the debugger client create the
+	       (child domain) boxed value in the root domain for the purpose of inspecting the enum/structs when
+		   debugging.
+		 */
+		
+		/* g_assert (domain == domain2); Fixes enum/struct inspection, see comment above */
 
 		o = mono_object_new (domain, klass);
 
@@ -6738,8 +6760,7 @@ thread_commands (int command, guint8 *p, guint8 *end, Buffer *buf)
 		mono_loader_lock ();
 		tls = mono_g_hash_table_lookup (thread_to_tls, thread);
 		mono_loader_unlock ();
-		if (!tls)
-			return ERR_INVALID_ARGUMENT;
+		g_assert (tls);
 
 		compute_frame_info (thread, tls);
 
